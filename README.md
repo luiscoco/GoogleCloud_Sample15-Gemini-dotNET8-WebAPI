@@ -155,29 +155,6 @@ namespace GoogleGeminiWebAPI
 }
 ```
 
-This is a **JSON request** sample
-
-```JSON
-{
-    "contents": {
-        "role": "user",
-    "parts": {
-            "text": "Give me a recipe for banana bread."
-    }
-    },
-  "safety_settings": {
-        "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
-    "threshold": "BLOCK_LOW_AND_ABOVE"
-  },
-  "generation_config": {
-        "temperature": 0.2,
-    "topP": 0.8,
-    "topK": 40,
-    "maxOutputTokens": 1000
-  }
-}
-```
-
 ### 3.6. Create the Service
 
 **GoogleGeminiService.cs**
@@ -312,4 +289,37 @@ app.Run();
 ```
 
 ## 4. Run and test the application
+
+![image](https://github.com/luiscoco/GoogleCloud_Sample15-Gemini-dotNET8-WebAPI/assets/32194879/0428e301-e349-435b-bd52-2445726219e7)
+
+We send a POST request
+
+![image](https://github.com/luiscoco/GoogleCloud_Sample15-Gemini-dotNET8-WebAPI/assets/32194879/f3a286b1-a51f-4308-820e-bbfb16d3025a)
+
+This is a **JSON request** sample
+
+```JSON
+{
+    "contents": {
+        "role": "user",
+    "parts": {
+            "text": "Give me a recipe for banana bread."
+    }
+    },
+  "safety_settings": {
+        "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+    "threshold": "BLOCK_LOW_AND_ABOVE"
+  },
+  "generation_config": {
+        "temperature": 0.2,
+    "topP": 0.8,
+    "topK": 40,
+    "maxOutputTokens": 1000
+  }
+}
+```
+
+This is the response we get
+
+![image](https://github.com/luiscoco/GoogleCloud_Sample15-Gemini-dotNET8-WebAPI/assets/32194879/d8fee700-e621-4bcd-807a-e8af6ed1ed4c)
 
