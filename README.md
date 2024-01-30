@@ -1,5 +1,7 @@
 # How to create a .NET8 Web API to invoke Google Cloud Gemini service (Vertex AI)
 
+See the source code://github.com/luiscoco/GoogleCloud_Sample15-Gemini-dotNET8-WebAPI
+
 ## 1. Prerequisites
 
 **Commands summary**
