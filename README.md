@@ -93,13 +93,13 @@ We select the project main features
 
 ### 3.4. Modify the appsettings.json file
 
-We print the Access Token, and in the following section we teach you how to set the Postman authorization request
+We print the **Access Token** to include it in the appsettings.json file
 
 ```
 gcloud auth print-access-token
 ```
 
-We also copy the endpoint from this URL: https://cloud.google.com/vertex-ai/docs/generative-ai/model-reference/gemini
+We also copy in the appsettings.json the endpoint taken from this URL: https://cloud.google.com/vertex-ai/docs/generative-ai/model-reference/gemini
 
 ```
 https://us-central1-aiplatform.googleapis.com/
@@ -109,7 +109,7 @@ publishers/google/models/gemini-pro:streamGenerateContent?alt=sse
 
 ![image](https://github.com/luiscoco/GoogleCloud_Sample15-Gemini-dotNET8-WebAPI/assets/32194879/024d5560-461b-4804-9a49-512a528ef259)
 
-This is the final code including the access token and the Google Cloud Gemini endpoint
+This is the final code including the **access token** and the **Google Cloud Gemini endpoint**
 
 **appsettings.json**
 
@@ -128,6 +128,8 @@ This is the final code including the access token and the Google Cloud Gemini en
 ```
 
 ### 3.5. Create the Model
+
+We create the request model, we are going to send to Google Cloud Gemini service
 
 **GoogleGeminiRequest.cs**
 
@@ -172,6 +174,8 @@ namespace GoogleGeminiWebAPI
 ```
 
 ### 3.6. Create the Service
+
+We create the service for invoking (via HTTP) the Google Cloud Gemini service
 
 **GoogleGeminiService.cs**
 
@@ -278,17 +282,15 @@ using GoogleGeminiWebAPI;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Add services to the container
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddHttpClient<GoogleGeminiService>();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -306,9 +308,11 @@ app.Run();
 
 ## 4. Run and test the application
 
+We build and run the app in Visual Studio 2022
+
 ![image](https://github.com/luiscoco/GoogleCloud_Sample15-Gemini-dotNET8-WebAPI/assets/32194879/0428e301-e349-435b-bd52-2445726219e7)
 
-We send a POST request
+We send a **POST** request
 
 ![image](https://github.com/luiscoco/GoogleCloud_Sample15-Gemini-dotNET8-WebAPI/assets/32194879/f3a286b1-a51f-4308-820e-bbfb16d3025a)
 
@@ -335,11 +339,11 @@ This is a **JSON request** sample
 }
 ```
 
-This is the response we get
+This is the **response** we get
 
 ![image](https://github.com/luiscoco/GoogleCloud_Sample15-Gemini-dotNET8-WebAPI/assets/32194879/d8fee700-e621-4bcd-807a-e8af6ed1ed4c)
 
-See also the detail response content
+See also the **detailed response** content
 
 ```
 data: {"candidates": [{"content": {"role": "model","parts": [{"text": "Ingredients:\n\n- 1 1/2 cups all-purpose flour\n- 1 teaspoon baking soda\n- 1/2 teaspoon salt\n- 1/2 cup (1 stick) unsalted butter, softened\n- 3/4 cup granulated sugar\n- 3/4 cup packed light brown"}]},"safetyRatings": [{"category": "HARM_CATEGORY_HARASSMENT","probability": "NEGLIGIBLE"},{"category": "HARM_CATEGORY_HATE_SPEECH","probability": "NEGLIGIBLE"},{"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT","probability": "NEGLIGIBLE"},{"category": "HARM_CATEGORY_DANGEROUS_CONTENT","probability": "NEGLIGIBLE"}]}]}
