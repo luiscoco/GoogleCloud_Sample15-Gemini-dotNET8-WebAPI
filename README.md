@@ -91,6 +91,8 @@ https://cloud.google.com/vertex-ai/docs/generative-ai/model-reference/gemini
 
 ### 3.5. Create the Model
 
+**GoogleGeminiRequest.cs**
+
 ```csharp
 namespace GoogleGeminiWebAPI
 {
@@ -131,7 +133,7 @@ namespace GoogleGeminiWebAPI
 }
 ```
 
-This is a JSON request sample
+This is a **JSON request** sample
 
 ```JSON
 {
@@ -156,9 +158,136 @@ This is a JSON request sample
 
 ### 3.6. Create the Service
 
+**GoogleGeminiService.cs**
+
+```csharp
+// GoogleGeminiService.cs
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
+
+namespace GoogleGeminiWebAPI
+{
+    public class GoogleGeminiService
+    {
+        private readonly HttpClient _httpClient;
+        private readonly IConfiguration _configuration;
+
+        public GoogleGeminiService(HttpClient httpClient, IConfiguration configuration)
+        {
+            _httpClient = httpClient;
+            _configuration = configuration;
+        }
+
+        public async Task<string> GetResponseStringAsync(GoogleGeminiRequest request)
+        {
+            var chatGptApiUrl = _configuration["GoogleGeminiApiUrl"];
+            var apiKey = _configuration["AccessToken"];
+
+            var apiUrl = chatGptApiUrl;
+
+            var requestContent = new StringContent(
+                JsonConvert.SerializeObject(request),
+                Encoding.UTF8,
+                "application/json");
+
+            _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {apiKey}");
+
+            var response = await _httpClient.PostAsync(apiUrl, requestContent);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new HttpRequestException(
+                    $"HTTP request failed with status code {response.StatusCode}. " +
+                    $"Response content: {await response.Content.ReadAsStringAsync()}");
+            }
+
+            return await response.Content.ReadAsStringAsync();
+        }
+    }
+}
+```
+
 ### 3.7. Create the Controller
 
+**GoogleGeminiController.cs**
+
+```csharp
+// GoogleGeminiController.cs
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace GoogleGeminiWebAPI
+{
+    [ApiController]
+    [Route("[controller]")]
+    public class GoogleGeminiController : ControllerBase
+    {
+        private readonly GoogleGeminiService _googleGeminiService;
+
+        public GoogleGeminiController(GoogleGeminiService googleGeminiService)
+        {
+            _googleGeminiService = googleGeminiService;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] GoogleGeminiRequest request)
+        {
+            try
+            {
+                var responseString = await _googleGeminiService.GetResponseStringAsync(request);
+                return Ok(responseString);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                Console.WriteLine(ex.ToString());
+                return StatusCode(500, "An error occurred while processing the response.");
+            }
+        }
+    }
+}
+```
+
 ### 3.8. Modify the middleware program.cs file
+
+**program.cs**
+
+```csharp
+using GoogleGeminiWebAPI;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddHttpClient<GoogleGeminiService>();
+builder.Services.AddSwaggerGen();
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();
+```
 
 ## 4. Run and test the application
 
