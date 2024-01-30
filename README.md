@@ -69,7 +69,11 @@ https://cloud.google.com/vertex-ai/docs/generative-ai/model-reference/gemini
 
 ### 3.2. Run Visual studio and 
 
+
+
 ### 3.3. Create the project folders structure
+
+![image](https://github.com/luiscoco/GoogleCloud_Sample15-Gemini-dotNET8-WebAPI/assets/32194879/737d05b9-89c0-4b74-a0bb-a95cfe3ee1da)
 
 ### 3.4. Modify the appsettings.json file
 
