@@ -77,6 +77,14 @@ https://cloud.google.com/vertex-ai/docs/generative-ai/model-reference/gemini
 
 ### 3.4. Modify the appsettings.json file
 
+We print the Access Token, and in the following section we teach you how to set the Postman authorization request
+
+```
+gcloud auth print-access-token
+```
+
+This is the final code including the access token and the Google Cloud Gemini endpoint
+
 **appsettings.json**
 
 ```json
