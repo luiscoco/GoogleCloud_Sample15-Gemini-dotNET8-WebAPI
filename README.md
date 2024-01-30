@@ -57,3 +57,29 @@ gcloud ai endpoints list --region=us-central1
 
 ![image](https://github.com/luiscoco/GoogleCloud_Sample14-API-Gemini-with-Postman/assets/32194879/2b37b266-08f2-418c-a382-27078c20aa8a)
 
+## 2. Gemini API Reference documentation
+
+We recomend you to visit the following web pages to start working with **Gemini**
+
+https://cloud.google.com/vertex-ai/docs/generative-ai/start/quickstarts/quickstart-multimodal
+
+https://cloud.google.com/vertex-ai/docs/generative-ai/model-reference/gemini
+
+## 3. Create the .NET8 WebAPI
+
+### 3.2. Run Visual studio and 
+
+### 3.3. Create the project folders structure
+
+### 3.4. Modify the appsettings.json file
+
+### 3.5. Create the Model
+
+### 3.6. Create the Service
+
+### 3.7. Create the Controller
+
+### 3.8. Modify the middleware program.cs file
+
+## 4. Run and test the application
+
