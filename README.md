@@ -73,7 +73,86 @@ https://cloud.google.com/vertex-ai/docs/generative-ai/model-reference/gemini
 
 ### 3.4. Modify the appsettings.json file
 
+**appsettings.json**
+
+```json
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "GoogleGeminiApiUrl": "https://us-central1-aiplatform.googleapis.com/v1/projects/endless-set-412215/locations/us-central1/publishers/google/models/gemini-pro:streamGenerateContent?alt=sse",
+  "AccessToken": "ya29.a0AfB_byAJC7kdN7JmSbXTl56kXeuyeilB6AopPCScrW0j2U7n9ruKflUYQSuI-Zo-qvF9D9TFp0-5hcYZSF7vTcPDHG3oQcwGTd0oYTSZodVZYJFh61HaDflFqpcNOhNBMMUuXO674fXvl-URmhIgB7acmTh2a1pbUbIDxk0M9QaCgYKAU8SARESFQHGX2MiVziO9To0tNFpcCWiwqsIgw0177",
+  "AllowedHosts": "*"
+}
+```
+
 ### 3.5. Create the Model
+
+```csharp
+namespace GoogleGeminiWebAPI
+{
+    public class GoogleGeminiRequest
+    {
+        public Contents contents { get; set; }
+        public SafetySettings safety_settings { get; set; }
+        public GenerationConfig generation_config { get; set; }
+    }
+
+    public class Contents
+    {
+        public string role { get; set; }
+        public PartRequest parts { get; set; } // Changed from List<PartRequest> to PartRequest
+    }
+
+    public class PartRequest
+    {
+        // Removed FileData property since it's not present in the JSON format
+        public string text { get; set; }
+    }
+
+    // The FileData class can be removed if it's not used elsewhere
+
+    public class SafetySettings
+    {
+        public string category { get; set; }
+        public string threshold { get; set; }
+    }
+
+    public class GenerationConfig
+    {
+        public double temperature { get; set; }
+        public double topP { get; set; }
+        public int topK { get; set; }
+        public int maxOutputTokens { get; set; } // This property is missing in the provided JSON
+    }
+}
+```
+
+This is a JSON request sample
+
+```JSON
+{
+    "contents": {
+        "role": "user",
+    "parts": {
+            "text": "Give me a recipe for banana bread."
+    }
+    },
+  "safety_settings": {
+        "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+    "threshold": "BLOCK_LOW_AND_ABOVE"
+  },
+  "generation_config": {
+        "temperature": 0.2,
+    "topP": 0.8,
+    "topK": 40,
+    "maxOutputTokens": 1000
+  }
+}
+```
 
 ### 3.6. Create the Service
 
