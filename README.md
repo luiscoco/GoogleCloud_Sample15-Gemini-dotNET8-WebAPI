@@ -69,9 +69,23 @@ https://cloud.google.com/vertex-ai/docs/generative-ai/model-reference/gemini
 
 ## 3. Create the .NET8 WebAPI
 
-### 3.2. Run Visual studio and 
+### 3.2. Run Visual studio and create a new WebAPI
 
+We create a new project
 
+![image](https://github.com/luiscoco/GoogleCloud_Sample15-Gemini-dotNET8-WebAPI/assets/32194879/390add0a-5c00-480e-b688-3da2b10c535a)
+
+We select the project template
+
+![image](https://github.com/luiscoco/GoogleCloud_Sample15-Gemini-dotNET8-WebAPI/assets/32194879/0f86eeb5-d6d8-42fb-ba61-2d1224f029d8)
+
+We input the project name and location
+
+![image](https://github.com/luiscoco/GoogleCloud_Sample15-Gemini-dotNET8-WebAPI/assets/32194879/d8598499-7eed-4e5b-9230-b63c063142af)
+
+We select the project main features
+
+![image](https://github.com/luiscoco/GoogleCloud_Sample15-Gemini-dotNET8-WebAPI/assets/32194879/7b9e485a-34e8-4bb7-b214-e70cb86669ca)
 
 ### 3.3. Create the project folders structure
 
