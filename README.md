@@ -83,6 +83,16 @@ We print the Access Token, and in the following section we teach you how to set 
 gcloud auth print-access-token
 ```
 
+We also copy the endpoint from this URL: https://cloud.google.com/vertex-ai/docs/generative-ai/model-reference/gemini
+
+```
+https://us-central1-aiplatform.googleapis.com/
+v1/projects/PROJECT_ID/locations/us-central1/
+publishers/google/models/gemini-pro:streamGenerateContent?alt=sse
+```
+
+![image](https://github.com/luiscoco/GoogleCloud_Sample15-Gemini-dotNET8-WebAPI/assets/32194879/024d5560-461b-4804-9a49-512a528ef259)
+
 This is the final code including the access token and the Google Cloud Gemini endpoint
 
 **appsettings.json**
